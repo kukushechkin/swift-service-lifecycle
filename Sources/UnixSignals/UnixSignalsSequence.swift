@@ -84,7 +84,7 @@ public struct UnixSignalsSequence: AsyncSequence, Sendable {
 
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension UnixSignalsSequence {
-    fileprivate final class Storage: @unchecked Sendable {
+    fileprivate final class Storage: Sendable {
         private let stateMachine: LockedValueBox<StateMachine>
 
         init(signals: Set<UnixSignal>) async {

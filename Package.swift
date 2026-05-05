@@ -75,11 +75,11 @@ let package = Package(
 )
 
 for target in package.targets {
+    var settings = target.swiftSettings ?? []
+    settings.append(.unsafeFlags(["-require-explicit-sendable"]))
     #if compiler(<6.2)
     // Needed since Sendable checking with isolated methods is not working correctly before 6.2
-    if target.swiftSettings == nil {
-        target.swiftSettings = []
-    }
-    target.swiftSettings?.append(.swiftLanguageMode(.v5))
+    settings.append(.swiftLanguageMode(.v5))
     #endif
+    target.swiftSettings = settings
 }

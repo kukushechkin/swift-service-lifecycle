@@ -241,12 +241,12 @@ public enum TaskLocals {
 
 @_spi(TestKit)
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-public final class GracefulShutdownManager: @unchecked Sendable {
-    struct Handler {
+public final class GracefulShutdownManager: Sendable {
+    struct Handler: Sendable {
         /// The id of the handler.
         var id: UInt64
         /// The actual handler.
-        var handler: () -> Void
+        var handler: @Sendable () -> Void
     }
 
     struct State {
